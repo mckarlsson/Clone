@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <Button
+        android:id="@+id/loginButton"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/instaClone"
+        android:onClick="after_click_login"
+        android:text="Log In"
+        android:textSize="18sp"
+ />
+
+    <ImageView
+        android:id="@+id/instaClone"
+        android:layout_width="258dp"
+        android:layout_height="106dp"
+        android:layout_centerInParent="true"
+        android:layout_marginBottom="20dp"
+        app:srcCompat="@drawable/insta_logo" />
+    
+    <LinearLayout
+        android:id="@+id/profile_layout"
+        android:layout_below="@+id/loginButton"
+        android:gravity="center_horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        >
+        <ImageView
+            android:id="@+id/prof_pic"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="5dp"/>
+        <TextView
+            android:id="@+id/username"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="5dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp" />
+
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/homeScreen"
+        android:layout_below="@id/profile_layout"
+        android:layout_centerHorizontal="true">
+
+        <Button
+            android:id="@+id/enterButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="click_enter"
+            android:text="Enter" />
+    </RelativeLayout>
+
+</RelativeLayout>
