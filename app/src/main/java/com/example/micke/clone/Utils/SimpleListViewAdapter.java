@@ -9,6 +9,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.micke.clone.FeedActivity;
 import com.example.micke.clone.Utils.Data;
 import com.example.micke.clone.R;
 import com.squareup.picasso.Picasso;
@@ -19,6 +20,7 @@ public class SimpleListViewAdapter extends ArrayAdapter<Data> {
 
     private Context context;
     private ArrayList<Data> data;
+    private FeedActivity onItemClickListener;
 
     public SimpleListViewAdapter(Context context, int textViewResourceId, ArrayList<Data> objects) {
         super(context, textViewResourceId, objects);
@@ -52,6 +54,10 @@ public class SimpleListViewAdapter extends ArrayAdapter<Data> {
                 .into(iv_photo);
 
         return curView;
+    }
+
+    public void setOnItemClickListener(FeedActivity onItemClickListener) {
+        this.onItemClickListener = onItemClickListener;
     }
 
     class ViewHolder{

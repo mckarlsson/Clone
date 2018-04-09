@@ -9,6 +9,7 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
@@ -26,7 +27,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class FeedActivity extends AppCompatActivity{
+public class FeedActivity extends AppCompatActivity implements AdapterView.OnItemClickListener{
     private static final String TAG = "FeedActivity";
     private EditText etSearch;
     private ListView lvFeed;
@@ -55,6 +56,7 @@ public class FeedActivity extends AppCompatActivity{
         // Set the listview adapter
         lvAdapter = new SimpleListViewAdapter(this, 0, data);
         lvFeed.setAdapter(lvAdapter);
+        lvAdapter.setOnItemClickListener(this);
 
 
 
@@ -150,4 +152,9 @@ public class FeedActivity extends AppCompatActivity{
                 Toast.makeText(getApplicationContext(), t.toString(), Toast.LENGTH_LONG).show();
             }
         });}
+
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+    }
 }
