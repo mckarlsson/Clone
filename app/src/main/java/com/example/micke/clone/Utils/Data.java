@@ -1,6 +1,9 @@
 package com.example.micke.clone.Utils;
 
-public class Data {
+import android.os.Parcel;
+import android.os.Parcelable;
+
+public class Data implements Parcelable{
     private Images  images;
     private User user;
 
@@ -10,6 +13,16 @@ public class Data {
 
     public User getUser() {
         return user;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+
     }
 
     public class User {

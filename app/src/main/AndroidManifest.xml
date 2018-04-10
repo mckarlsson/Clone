@@ -19,6 +19,8 @@
         </activity>
         <activity android:name=".HomeScreen"></activity>
         <activity android:name=".FeedActivity"></activity>
+        <activity android:name=".DetailV"></activity>
+        <activity android:name=".FeedActivity"></activity>
     </application>
 
 </manifest>

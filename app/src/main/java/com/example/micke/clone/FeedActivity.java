@@ -3,19 +3,18 @@ package com.example.micke.clone;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.view.KeyEvent;
 import android.view.View;
-import android.view.inputmethod.EditorInfo;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.micke.clone.Fragments.DetailView;
 import com.example.micke.clone.Utils.Data;
 import com.example.micke.clone.Utils.InstagramResponse;
 import com.example.micke.clone.Utils.RestClient;
@@ -27,16 +26,20 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class FeedActivity extends AppCompatActivity implements AdapterView.OnItemClickListener{
+public class FeedActivity extends AppCompatActivity implements DetailView.viewPostListener{
     private static final String TAG = "FeedActivity";
+
     private EditText etSearch;
     private ListView lvFeed;
 
     private SimpleListViewAdapter lvAdapter;
-    private ArrayList<Data> data = new ArrayList<>();
+    private ArrayList data = new ArrayList<>();
 
     private String access_token = "";
     private boolean loaded = false;
+
+    private Context mContext = FeedActivity.this;
+    DetailView.viewPostListener mViewPostListener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,9 +59,27 @@ public class FeedActivity extends AppCompatActivity implements AdapterView.OnIte
         // Set the listview adapter
         lvAdapter = new SimpleListViewAdapter(this, 0, data);
         lvFeed.setAdapter(lvAdapter);
-        lvAdapter.setOnItemClickListener(this);
+        lvFeed.setOnItemClickListener(new DetailView.viewPostListener(){
 
 
+            @Override
+            public void onViewPost(ArrayList data) {
+
+            }
+        });
+
+        public void onViewPost(ArrayList Data) {
+            String postStuff = "";
+            Parcelable array = null;
+            data.toArray(new Parcelable[]{array});
+            DetailView fragment = new DetailView();
+            Bundle args = new Bundle();
+            Object url;
+            args.putParcelableArrayList("a", (ArrayList<? extends Parcelable>) array);
+
+            fragment.setArguments(args);
+
+        }
 
         // Set the listener for the "Done" button of the soft keyboard
        /** etSearch.setOnEditorActionListener(new TextView.OnEditorActionListener() {
@@ -91,6 +112,16 @@ public class FeedActivity extends AppCompatActivity implements AdapterView.OnIte
         ); **/
 
     }
+
+   /** private void onItemClick(ListView lvFeed, String access_token) {
+
+        public void onItemClick(AdapterView lvFeed, View view, int position, long id){
+            Intent intent = new Intent(mContext, DetailV.class);
+            intent.putExtra("token", access_token);
+            startActivity(intent);
+        }
+    } **/
+
 
     public void fetchData(String tag) {
         Call<InstagramResponse> call = RestClient.getRetrofitService().getTagPhotos(tag, access_token);
@@ -153,8 +184,9 @@ public class FeedActivity extends AppCompatActivity implements AdapterView.OnIte
             }
         });}
 
+
     @Override
-    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+    public void onViewPost(ArrayList data) {
 
     }
 }

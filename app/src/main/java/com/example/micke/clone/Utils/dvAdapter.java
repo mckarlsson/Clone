@@ -1,7 +1,6 @@
 package com.example.micke.clone.Utils;
 
 import android.content.Context;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,21 +9,18 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.micke.clone.FeedActivity;
-import com.example.micke.clone.Fragments.DetailView;
-import com.example.micke.clone.Utils.Data;
 import com.example.micke.clone.R;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
-public class SimpleListViewAdapter extends ArrayAdapter<Data> {
+public class dvAdapter extends ArrayAdapter<Data> {
 
     private Context context;
     private ArrayList<Data> data;
     private FeedActivity onItemClickListener;
-    private DetailView viewPostListener;
 
-    public SimpleListViewAdapter(Context context, int textViewResourceId, ArrayList<Data> objects) {
+    public dvAdapter(Context context, int textViewResourceId, ArrayList<Data> objects) {
         super(context, textViewResourceId, objects);
         this.context = context;
         this.data = objects;
@@ -37,7 +33,7 @@ public class SimpleListViewAdapter extends ArrayAdapter<Data> {
         if (curView == null) {
             holder = new ViewHolder();
             LayoutInflater vi = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            curView = vi.inflate(R.layout.feed_list_view_item, null);
+            curView = vi.inflate(R.layout.detail_view, null);
         }
 
         TextView tv_user_fullname = (TextView) curView.findViewById(R.id.tv_user_fullname);
