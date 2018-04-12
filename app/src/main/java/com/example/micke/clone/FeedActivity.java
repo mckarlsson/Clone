@@ -95,6 +95,7 @@ public class FeedActivity extends AppCompatActivity implements AdapterView.OnIte
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id)
     {
+        // id/position is an index in the listview. Both seem to change when you click a different entry. Top is 0 and goes +1
         Log.d(TAG, "Click!");
     }
 
