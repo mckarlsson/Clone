@@ -39,7 +39,7 @@ public class FeedActivity extends AppCompatActivity {
     private ListView lvFeed;
 
     private SimpleListViewAdapter lvAdapter;
-    private ArrayList<Data> data = new ArrayList<>();
+    static public ArrayList<Data> data = new ArrayList<>();
 
     private String access_token = "";
     private boolean loaded = false;
@@ -71,9 +71,9 @@ public class FeedActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-               /** TextView tv_user_fullname = (TextView) findViewById(R.id.tv_user_fullname);
-                ImageView iv_photo = (ImageView) findViewById(R.id.iv_photo);
-                ImageView iv_profile = (ImageView) findViewById(R.id.iv_profile); **/
+                /** TextView tv_user_fullname = (TextView) findViewById(R.id.tv_user_fullname);
+                 ImageView iv_photo = (ImageView) findViewById(R.id.iv_photo);
+                 ImageView iv_profile = (ImageView) findViewById(R.id.iv_profile); **/
 
 
                 Log.d(TAG, "onItemClick: parent "+parent);
@@ -84,12 +84,10 @@ public class FeedActivity extends AppCompatActivity {
                 Log.d(TAG, "onItemClick: data "+data);
                 Log.d(TAG, "onItemClick: lvApdapter "+lvAdapter);
                 Intent intent = new Intent(mContext, DetailV.class);
-                intent.putExtra("data", id);
+                intent.putExtra("data", position);
                 startActivity(intent);
 
-                //mViewPostListener.onViewPost(parent, view, position, id);
-
-
+                //mViewPostListener.onViewPost(parent, view, position, id)
             }
         });
 
