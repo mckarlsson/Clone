@@ -6,11 +6,15 @@ import android.os.Bundle;
 import android.os.Parcelable;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -20,20 +24,22 @@ import com.example.micke.clone.Utils.InstagramResponse;
 import com.example.micke.clone.Utils.RestClient;
 import com.example.micke.clone.Utils.SimpleListViewAdapter;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
+import de.greenrobot.event.EventBus;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class FeedActivity extends AppCompatActivity implements DetailView.viewPostListener{
+public class FeedActivity extends AppCompatActivity {
     private static final String TAG = "FeedActivity";
 
     private EditText etSearch;
     private ListView lvFeed;
 
     private SimpleListViewAdapter lvAdapter;
-    private ArrayList data = new ArrayList<>();
+    private ArrayList<Data> data = new ArrayList<>();
 
     private String access_token = "";
     private boolean loaded = false;
@@ -59,27 +65,35 @@ public class FeedActivity extends AppCompatActivity implements DetailView.viewPo
         // Set the listview adapter
         lvAdapter = new SimpleListViewAdapter(this, 0, data);
         lvFeed.setAdapter(lvAdapter);
-        lvFeed.setOnItemClickListener(new DetailView.viewPostListener(){
+        lvFeed.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
-
+            private String detailContent = null;
             @Override
-            public void onViewPost(ArrayList data) {
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+               /** TextView tv_user_fullname = (TextView) findViewById(R.id.tv_user_fullname);
+                ImageView iv_photo = (ImageView) findViewById(R.id.iv_photo);
+                ImageView iv_profile = (ImageView) findViewById(R.id.iv_profile); **/
+
+
+                Log.d(TAG, "onItemClick: parent "+parent);
+                Log.d(TAG, "onItemClick: view "+view);
+                Log.d(TAG, "onItemClick: position "+position);
+                Log.d(TAG, "onItemClick: id "+id);
+
+                Log.d(TAG, "onItemClick: data "+data);
+                Log.d(TAG, "onItemClick: lvApdapter "+lvAdapter);
+                Intent intent = new Intent(mContext, DetailV.class);
+                intent.putExtra("data", id);
+                startActivity(intent);
+
+                //mViewPostListener.onViewPost(parent, view, position, id);
+
 
             }
         });
 
-        public void onViewPost(ArrayList Data) {
-            String postStuff = "";
-            Parcelable array = null;
-            data.toArray(new Parcelable[]{array});
-            DetailView fragment = new DetailView();
-            Bundle args = new Bundle();
-            Object url;
-            args.putParcelableArrayList("a", (ArrayList<? extends Parcelable>) array);
 
-            fragment.setArguments(args);
-
-        }
 
         // Set the listener for the "Done" button of the soft keyboard
        /** etSearch.setOnEditorActionListener(new TextView.OnEditorActionListener() {
@@ -184,9 +198,4 @@ public class FeedActivity extends AppCompatActivity implements DetailView.viewPo
             }
         });}
 
-
-    @Override
-    public void onViewPost(ArrayList data) {
-
-    }
 }

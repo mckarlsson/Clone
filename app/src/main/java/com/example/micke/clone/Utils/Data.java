@@ -7,6 +7,21 @@ public class Data implements Parcelable{
     private Images  images;
     private User user;
 
+    protected Data(Parcel in) {
+    }
+
+    public static final Creator<Data> CREATOR = new Creator<Data>() {
+        @Override
+        public Data createFromParcel(Parcel in) {
+            return new Data(in);
+        }
+
+        @Override
+        public Data[] newArray(int size) {
+            return new Data[size];
+        }
+    };
+
     public Images getImages() {
         return images;
     }
@@ -22,7 +37,6 @@ public class Data implements Parcelable{
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-
     }
 
     public class User {

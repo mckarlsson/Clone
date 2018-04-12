@@ -16,10 +16,12 @@ import com.example.micke.clone.Utils.Data;
 import java.util.ArrayList;
 
 public class DetailView extends Fragment {
-    private static final String TAG = "DetailV";
+    private static final String TAG = "DetailView";
 
     public interface viewPostListener{
         void onViewPost(ArrayList data);
+
+        void onViewPost(AdapterView<?> parent, View view, int position, long id);
 
         //void onItemClick(AdapterView<?> parent, View view, int position, long id);
     }
