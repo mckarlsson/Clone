@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -21,6 +22,7 @@ import com.example.micke.clone.Utils.InstagramResponse;
 import com.example.micke.clone.Utils.RestClient;
 import com.example.micke.clone.Utils.SimpleListViewAdapter;
 import com.example.micke.clone.Utils.dvAdapter;
+import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -40,28 +42,37 @@ public class DetailV extends AppCompatActivity{
     private ListView dview;
     private dvAdapter dvAdapter;
     private ArrayList<Data> data = new ArrayList<>();
+    private int item;
 
 
     @Override
-    public void onCreate(@Nullable Bundle savedInstanceState, @Nullable PersistableBundle persistentState) {
-        super.onCreate(savedInstanceState, persistentState);
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
         setContentView(R.layout.detail_view);
 
 
         dview = findViewById(R.id.dVlv);
         // Get the access_token from the intent extra
         Intent i = this.getIntent();
-        String dStr = i.getStringExtra("data");
+        Long id = i.getLongExtra("id", 0L);
+        int itm = i.getIntExtra("item", item);
+
         dvAdapter = new dvAdapter(this, 0, data);
         dview.setAdapter(dvAdapter);
 
 
 
 
-        Log.d(TAG, "onCreate: arrList "+dStr);
-        Log.d(TAG, "onCreate: data "+data);
+        Log.d(TAG, "onCreate: arrList "+id);
+        Log.d(TAG, "onCreate: data "+data.toString());
+        Log.d(TAG, "onCreate: itm "+itm);
+        Picasso.with(mContext)
+                .load(itm)
+                .resize(100,100).into((ImageView) findViewById(R.id.ivDetail));
 
     }
+
+
 
 
 }

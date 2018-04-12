@@ -83,8 +83,12 @@ public class FeedActivity extends AppCompatActivity {
 
                 Log.d(TAG, "onItemClick: data "+data);
                 Log.d(TAG, "onItemClick: lvApdapter "+lvAdapter);
+
+                Data item = data.get(position);
+                Log.d(TAG, "onItemClick: dataposition "+item.toString());
                 Intent intent = new Intent(mContext, DetailV.class);
-                intent.putExtra("data", id);
+                intent.putExtra("id", id);
+                intent.putExtra("item", item);
                 startActivity(intent);
 
                 //mViewPostListener.onViewPost(parent, view, position, id);
