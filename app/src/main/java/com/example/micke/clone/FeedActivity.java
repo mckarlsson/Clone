@@ -9,6 +9,7 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
@@ -26,7 +27,8 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class FeedActivity extends AppCompatActivity{
+public class FeedActivity extends AppCompatActivity implements AdapterView.OnItemClickListener
+{
     private static final String TAG = "FeedActivity";
     private EditText etSearch;
     private ListView lvFeed;
@@ -56,7 +58,7 @@ public class FeedActivity extends AppCompatActivity{
         lvAdapter = new SimpleListViewAdapter(this, 0, data);
         lvFeed.setAdapter(lvAdapter);
 
-
+        lvFeed.setOnItemClickListener(this);
 
         // Set the listener for the "Done" button of the soft keyboard
        /** etSearch.setOnEditorActionListener(new TextView.OnEditorActionListener() {
@@ -88,6 +90,12 @@ public class FeedActivity extends AppCompatActivity{
 
         ); **/
 
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id)
+    {
+        Log.d(TAG, "Click!");
     }
 
     public void fetchData(String tag) {
