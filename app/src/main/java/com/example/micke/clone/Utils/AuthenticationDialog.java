@@ -25,7 +25,7 @@ public class AuthenticationDialog extends Dialog{
             +"&redirect_uri="
             +Constants.REDIRECT_URI
             +"&response_type=token"
-            +"&display=touch&scope=public_content";
+            +"&display=touch&scope=public_content+comments";
 
     public AuthenticationDialog(@NonNull Context context, AuthenticationListener listener) {
         super(context);

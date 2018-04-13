@@ -6,6 +6,8 @@ import android.os.Parcelable;
 public class Data implements Parcelable{
     private Images  images;
     private User user;
+    private Comments comment;
+    private MediaId mediaId;
 
     protected Data(Parcel in) {
     }
@@ -29,6 +31,12 @@ public class Data implements Parcelable{
     public User getUser() {
         return user;
     }
+
+    public Comments getComment(){
+        return comment;
+    }
+
+    public MediaId getMediaId(){return mediaId;}
 
     @Override
     public int describeContents() {
@@ -69,6 +77,24 @@ public class Data implements Parcelable{
             public String getUrl() {
                 return url;
             }
+        }
+    }
+
+    public class MediaId{
+
+        private String mediaId;
+
+        public String getMediaId() {
+            return mediaId;
+        }
+    }
+
+    public class Comments {
+
+        private String comments;
+
+        public String getComments() {
+            return comments;
         }
     }
 }

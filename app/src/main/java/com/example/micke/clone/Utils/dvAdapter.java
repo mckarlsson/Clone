@@ -33,23 +33,16 @@ public class dvAdapter extends ArrayAdapter<Data> {
         if (curView == null) {
             holder = new ViewHolder();
             LayoutInflater vi = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            curView = vi.inflate(R.layout.detail_view, null);
+            curView = vi.inflate(R.layout.comment_view, null);
         }
 
-        TextView tv_user_fullname = (TextView) curView.findViewById(R.id.tv_user_fullname);
-        ImageView iv_photo = (ImageView) curView.findViewById(R.id.iv_photo);
-        ImageView iv_profile = (ImageView) curView.findViewById(R.id.iv_profile);
+        TextView tv_user_fullname = (TextView) curView.findViewById(R.id.comment_username);
+        TextView tv_comment_text = (TextView) curView.findViewById(R.id.comment_text);
+
 
         tv_user_fullname.setText(data.get(position).getUser().getFull_name());
+        tv_comment_text.setText(data.get(position).getComment().getComments());
 
-        Picasso.with(context)
-                .load(data.get(position).getUser().getProfile_picture())
-                .resize(100, 100)
-                .centerInside()
-                .into(iv_profile);
-        Picasso.with(context)
-                .load(data.get(position).getImages().getStandard_resolution().getUrl())
-                .into(iv_photo);
 
         return curView;
     }
